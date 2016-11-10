@@ -62,7 +62,7 @@ DATABASES = {
         'NAME': os.environ.get('DB_ENV_DB', 'postgres'),
         'USER': os.environ.get('DB_ENV_POSTGRES_USER', 'postgres'),
         'PASSWORD': os.environ.get('DB_ENV_POSTGRES_PASSWORD', 'postgres'),
-        'HOST': os.environ.get('DB_PORT_5432_TCP_ADDR', ''),
+        'HOST': os.environ.get('DB_PORT_5432_TCP_ADDR', 'db'),
         'PORT': os.environ.get('DB_PORT_5432_TCP_PORT', ''),
     },
 }
@@ -71,9 +71,9 @@ DATABASES = {
 
 REDIS_PORT = 6379
 REDIS_DB = 0
-REDIS_HOST = os.environ.get('REDIS_PORT_6379_TCP_ADDR', '127.0.0.1')
+REDIS_HOST = os.environ.get('REDIS_PORT_6379_TCP_ADDR', 'redis')
 
-RABBIT_HOSTNAME = os.environ.get('RABBIT_PORT_5672_TCP', 'localhost:5672')
+RABBIT_HOSTNAME = os.environ.get('RABBIT_PORT_5672_TCP', 'rabbit')
 
 if RABBIT_HOSTNAME.startswith('tcp://'):
     RABBIT_HOSTNAME = RABBIT_HOSTNAME.split('//')[1]

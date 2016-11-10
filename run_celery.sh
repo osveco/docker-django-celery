@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# wait for broker container
+# wait for RabbitMQ server to start
 sleep 10
 
 cd myproject
