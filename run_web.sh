@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# wait for DB container
+# wait for PSQL server to start
 sleep 10
 
 cd myproject
