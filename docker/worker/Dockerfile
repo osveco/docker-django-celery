@@ -22,4 +22,6 @@ RUN adduser --disabled-password --gecos '' myuser
 EXPOSE 8000
 STOPSIGNAL SIGINT
 
-CMD su -m myuser -c "celery worker -A myproject.celeryconf -Q default -n default@%h"
+COPY ./docker-entrypoint.sh /app/
+RUN chmod +x /app/docker-entrypoint.sh
+ENTRYPOINT ["/app/docker-entrypoint.sh"]

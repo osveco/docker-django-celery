@@ -11,7 +11,7 @@ SECRET_KEY = 'megg_yej86ln@xao^+)it4e&amp;ueu#!4tl9p1h%2sjr7ey0)m25f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 TEMPLATE_DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['172.16.120.134','172.16.120.131','172.16.120.140']
 
 # Application definition
 
@@ -20,15 +20,40 @@ INSTALLED_APPS = (
     'myproject',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-
+    'health_check',                             # required
+    'health_check.db',                          # stock Django health checkers
+    'health_check.cache',
+    'health_check.storage',
+    'health_check.contrib.celery',              # requires celery
+    'health_check.contrib.psutil',              # disk and memory utilization; requires psutil
     # required by Django 1.9
     'django.contrib.auth',
     'django.contrib.contenttypes',
 
 )
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
 MIDDLEWARE_CLASSES = (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
 )
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
@@ -61,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('DB_ENV_DB', 'postgres'),
         'USER': os.environ.get('DB_ENV_POSTGRES_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_ENV_POSTGRES_PASSWORD', 'postgres'),
+        'PASSWORD': os.environ.get('DB_ENV_POSTGRES_PASSWORD', 'Passw0rd'),
         'HOST': os.environ.get('DB_PORT_5432_TCP_ADDR', 'db'),
         'PORT': os.environ.get('DB_PORT_5432_TCP_PORT', ''),
     },

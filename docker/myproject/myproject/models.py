@@ -3,8 +3,8 @@ from django.db import models
 
 class Job(models.Model):
     TYPES = (
-        ('fibonacci', 'fibonacci'),
-        ('power', 'power'),
+        ('analyze', 'analyze'),
+        ('enhance', 'enhance'),
     )
 
     STATUSES = (

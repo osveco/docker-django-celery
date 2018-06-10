@@ -23,8 +23,7 @@ EXPOSE 8000
 STOPSIGNAL SIGINT
 
 RUN chmod +x manage.py
-ENTRYPOINT ["python3", "manage.py"]
 
-CMD ["makemigrations", "myproject"]
-CMD ["migrate"]
-CMD ["runserver", "0.0.0.0:8000"]
+COPY ./docker-entrypoint.sh /app/
+RUN chmod +x /app/docker-entrypoint.sh
+ENTRYPOINT ["/app/docker-entrypoint.sh"]

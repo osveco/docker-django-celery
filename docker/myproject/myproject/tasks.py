@@ -21,31 +21,17 @@ def update_job(fn):
             job.save()
     return wrapper
 
+@app.task
+@update_job
+def analyze(n):
+    return n**2
 
 @app.task
 @update_job
-def power(n):
-    """Return 2 to the n'th power"""
-    return 2 ** n
-
-
-@app.task
-@update_job
-def fib(n):
-    """Return the n'th Fibonacci number.
-    """
-    if n < 0:
-        raise ValueError("Fibonacci numbers are only defined for n >= 0.")
-    return _fib(n)
-
-
-def _fib(n):
-    if n == 0 or n == 1:
-        return n
-    else:
-        return _fib(n - 1) + _fib(n - 2)
+def enhance(n):
+    return 0
 
 TASK_MAPPING = {
-    'power': power,
-    'fibonacci': fib
+    'analyze': analyze,
+    'enhance': enhance
 }
